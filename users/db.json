@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "40",
+      "firstName": "asd",
+      "age": 40,
+      "teamId": "2"
+    },
+    {
+      "id": "41",
+      "firstName": "Bill",
+      "age": 40,
+      "teamId": "2"
+    },
+    {
+      "firstName": "Mohammed",
+      "age": 21,
+      "id": "rgnDvds"
+    },
+    {
+      "firstName": "Msfadhammed",
+      "age": 21,
+      "id": "9BWzcjQ"
+    },
+    {
+      "firstName": "Msfasdadhammed",
+      "age": 21,
+      "id": "oVzKPzM"
+    }
+  ],
+  "teams": [
+    {
+      "id": "1",
+      "name": "GeCode",
+      "description": "React"
+    },
+    {
+      "id": "2",
+      "name": "MadCoders",
+      "description": "Angular"
+    }
+  ]
+}
