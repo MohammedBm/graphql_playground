@@ -23,13 +23,28 @@ to write our queries directly into our javascript files
 */
 
 class SongList extends React.Component {
+
+  // this `renderSongs` helper will put our songs on the screen using the `.map` method
+  // which map every song inside our `data.songs`. Also we need to fetch id with our title
+  // to satisfy react, since it require id for each elemnts of any kind of array
+  renderSongs() {
+    return this.props.data.songs.map( song => {
+      return (
+        // we are importing Matrlize.CSS 👇
+        <li key={song.id} className='collection-item'>
+          {song.title}
+        </li>
+      )
+    })
+  }
+
   render() {
-    console.log(this.props)
+    if (this.props.data.loading) { return <div>Loading...</div>}
 
     return (
-      <p>
-        SongList
-      </p>
+      <ul className='collection'>
+        {this.renderSongs()}
+      </ul>
     )
   }
 
@@ -37,11 +52,12 @@ class SongList extends React.Component {
 
 /*
   2. here is our query we wrote down using the `graphql-tag` which giv us the
-  ability to write down query into our components 
+  ability to write down query into our components
 */
 const query = gql`
 	{
 		songs {
+      id
 			title
 		}
 	}
