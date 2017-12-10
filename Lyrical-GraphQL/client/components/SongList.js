@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router';
+import query from '../queries/fetchSong'
 
 // there is a list of straregy we can use when we try to add graphQL to React
 // 1. Identify data required
@@ -24,16 +25,22 @@ to write our queries directly into our javascript files
 */
 
 class SongList extends React.Component {
+  onSongDelete(id){
+    this.props.mutate({ variables: { id } })
+  }
 
   // this `renderSongs` helper will put our songs on the screen using the `.map` method
   // which map every song inside our `data.songs`. Also we need to fetch id with our title
   // to satisfy react, since it require id for each elemnts of any kind of array
   renderSongs() {
-    return this.props.data.songs.map( song => {
+    return this.props.data.songs.map( ({ id, title }) => {
       return (
         // we are importing Matrlize.CSS 👇
-        <li key={song.id} className='collection-item'>
-          {song.title}
+        <li key={id} className='collection-item'>
+          {title}
+          <i className = 'material-icons' onClick = {() => this.onSongDelete(id)} >
+          delete
+          </i>
         </li>
       )
     })
@@ -58,17 +65,27 @@ class SongList extends React.Component {
 
 /*
   2. here is our query we wrote down using the `graphql-tag` which giv us the
-  ability to write down query into our components
+  ability to   write down query into our components
 */
-const query = gql`
-	{
-		songs {
+// const query = gql`
+// 	{
+// 		songs {
+//       id
+// 			title
+// 		}
+// 	}
+// `;
+
+const mutation = gql`
+  mutation DeleteSong($id: ID){
+    deleteSong(id: $id){
       id
-			title
-		}
-	}
-`;
+    }
+  }
+`
 
 // this is the graphql that we imported from `react-apollol`. It looks very similar to redux.
 // this below bond our query to our Songlist component
-export default graphql(query)(SongList);
+export default graphql(mutation)(
+  graphql(query)(SongList)
+);
