@@ -2,7 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router';
-import query from '../queries/fetchSong'
+import query from '../queries/fetchSongs'
 
 // there is a list of straregy we can use when we try to add graphQL to React
 // 1. Identify data required
@@ -26,7 +26,8 @@ to write our queries directly into our javascript files
 
 class SongList extends React.Component {
   onSongDelete(id){
-    this.props.mutate({ variables: { id } })
+    this.props.mutate({ variables: { id }  })
+      .then( () => this.props.data.refetch())
   }
 
   // this `renderSongs` helper will put our songs on the screen using the `.map` method
@@ -37,9 +38,11 @@ class SongList extends React.Component {
       return (
         // we are importing Matrlize.CSS 👇
         <li key={id} className='collection-item'>
-          {title}
+          <Link to={`/songs/${id}`}>
+            {title}
+          </Link>
           <i className = 'material-icons' onClick = {() => this.onSongDelete(id)} >
-          delete
+            delete
           </i>
         </li>
       )
