@@ -41,7 +41,7 @@ class SongCreate extends Component {
 // on our mutation we are passing a title,  not like `graphiql where we hard code
 // to do that we can user these .
 // in the mutation argument we the name of pramater start with $ likse `$title: String` the type stays without a dollar sign
-  // inside the mutation body the name of the pramater is without a dollar sign, like this `title: $String` the type of the title takes the dollar sign this time
+// inside the mutation body the name of the pramater is without a dollar sign, like this `title: $String` the type of the title takes the dollar sign this time
 const mutation = gql`
   mutation AddSong($title: String){
     addSong(title: $title){
