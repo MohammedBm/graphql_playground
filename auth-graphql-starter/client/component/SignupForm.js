@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+  import React, { Component } from 'react'
 import AuthForm from './AuthForm'
 import { graphql } from 'react-apollo'
 import mutation from '../mutations/Signup'
